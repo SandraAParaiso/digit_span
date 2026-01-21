@@ -599,14 +599,12 @@
             <div id="permission-status"></div>
 
             <div class="status-message status-info" id="model-info" style="display: none;">
-                <strong>🤖 Paso 2: Modelo de reconocimiento de voz</strong><br>
-                Cargue el modelo Whisper-tiny (~150MB). Este modelo pequeño es altamente preciso para reconocimiento de dígitos. Se almacenará en caché para futuros usos.
+                <strong>🤖 Paso 2: Cargue el modelo de transcripción de voz</strong><br>
                 <br><br>
-                <small><strong>¿Por qué Whisper-tiny?</strong> Optimizado específicamente para vocabulario limitado como dígitos, con 99%+ de precisión, soporte multilingüe (español/catalán), y excelente robustez al ruido ambiente. Solo 150MB vs 3GB de modelos grandes.</small>
             </div>
 
             <button class="btn btn-secondary btn-large" id="model-btn" onclick="loadWhisperModel()" disabled style="margin-bottom: 16px; display: none;">
-                🤖 Cargar modelo Whisper-tiny
+                🤖 Cargar modelo de transcripción de voz
             </button>
 
             <div id="model-status"></div>
@@ -1190,7 +1188,7 @@
                 feedbackDiv.className = 'feedback error';
                 feedbackDiv.innerHTML = `
                     <strong>⚠️ No se detectaron dígitos</strong><br>
-                    Por favor, hable más alto y claro.<br>
+                    Por favor, hable más alto y claro. Diga los dígitos uno a uno<br>
                     Esperado: ${expected.join(' ')}
                 `;
                 document.getElementById('trial-controls').style.display = 'flex';
@@ -1521,7 +1519,7 @@
             modelBtn.disabled = true;
             modelBtn.textContent = '⏳ Cargando modelo...';
             
-            statusDiv.innerHTML = '<div class="status-message status-info">⏳ Descargando modelo Whisper-tiny (~150MB)...<br><small>Modelo optimizado para reconocimiento de dígitos con alta precisión</small><div class="loader"></div><div id="load-progress-main" style="margin-top: 10px; font-weight: bold;">Iniciando descarga...</div></div>';
+            statusDiv.innerHTML = '<div class="status-message status-info">⏳ Descargando modelo Whisper-tiny (~150MB)...<br><div class="loader"></div><div id="load-progress-main" style="margin-top: 10px; font-weight: bold;">Iniciando descarga...</div></div>';
             
             try {
                 console.log('Starting Whisper-tiny model download...');
@@ -1559,7 +1557,7 @@
                     console.log('Whisper-tiny model loaded successfully');
                     console.log('Pipeline type:', typeof whisperPipeline);
                     
-                    statusDiv.innerHTML = '<div class="status-message status-info" style="background: #d4edda; border-color: #c3e6cb; color: #155724;">✓ Paso 2 completado: Modelo Whisper-tiny cargado<br><small>Optimizado para reconocimiento de dígitos con 99%+ precisión</small></div>';
+                    statusDiv.innerHTML = '<div class="status-message status-info" style="background: #d4edda; border-color: #c3e6cb; color: #155724;">✓ Paso 2 completado: Modelo Whisper-tiny cargado<br></div>';
                     
                     modelBtn.textContent = '✓ Modelo cargado';
                     modelBtn.style.background = '#d4edda';
