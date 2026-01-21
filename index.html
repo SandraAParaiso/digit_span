@@ -564,7 +564,7 @@
         <!-- Screen 1: Configuration -->
         <div id="config-screen" class="screen active">
             <h1>Tarea de Amplitud de Dígitos</h1>
-            <p class="subtitle">Sistema de Evaluación Adaptativo con Whisper-tiny (ONNX)</p>
+            <p class="subtitle">Sistema de Evaluación Adaptativo con Whisper-small </p>
 
             <div class="form-group">
                 <label for="language">Idioma / Llengua:</label>
@@ -733,7 +733,7 @@
             stream: null
         };
 
-        // Whisper model pipeline (Whisper-tiny - optimized for digit recognition)
+        // Whisper model pipeline (Whisper-small - optimized for digit recognition)
         let whisperPipeline = null;
 
         const translations = {
@@ -1041,8 +1041,8 @@
                                 throw new Error('El modelo de reconocimiento de voz no está cargado');
                             }
                             
-                            // Transcribe using Whisper-tiny
-                            console.log('Transcribing with Whisper-tiny...');
+                            // Transcribe using Whisper-small
+                            console.log('Transcribing with Whisper-small...');
                             
                             // Show processing message
                             document.getElementById('digit-display').innerHTML = 
@@ -1519,16 +1519,16 @@
             modelBtn.disabled = true;
             modelBtn.textContent = '⏳ Cargando modelo...';
             
-            statusDiv.innerHTML = '<div class="status-message status-info">⏳ Descargando modelo Whisper-tiny (~150MB)...<br><div class="loader"></div><div id="load-progress-main" style="margin-top: 10px; font-weight: bold;">Iniciando descarga...</div></div>';
+            statusDiv.innerHTML = '<div class="status-message status-info">⏳ Descargando modelo Whisper-small (~500MB)...<br><div class="loader"></div><div id="load-progress-main" style="margin-top: 10px; font-weight: bold;">Iniciando descarga...</div></div>';
             
             try {
-                console.log('Starting Whisper-tiny model download...');
+                console.log('Starting Whisper-small model download...');
                 
-                // Load Whisper-tiny - optimal for digit recognition
+                // Load Whisper-small - optimal for digit recognition
                 // Only ~150MB, multilingual (Spanish/Catalan), excellent for limited vocabulary
                 whisperPipeline = await pipeline(
                     'automatic-speech-recognition', 
-                    'Xenova/whisper-tiny',
+                    'Xenova/whisper-small',
                     {
                         quantized: true, // Use quantized version for even better performance
                         progress_callback: (progress) => {
@@ -1554,10 +1554,10 @@
                 );
                 
                 if (whisperPipeline) {
-                    console.log('Whisper-tiny model loaded successfully');
+                    console.log('Whisper-small model loaded successfully');
                     console.log('Pipeline type:', typeof whisperPipeline);
                     
-                    statusDiv.innerHTML = '<div class="status-message status-info" style="background: #d4edda; border-color: #c3e6cb; color: #155724;">✓ Paso 2 completado: Modelo Whisper-tiny cargado<br></div>';
+                    statusDiv.innerHTML = '<div class="status-message status-info" style="background: #d4edda; border-color: #c3e6cb; color: #155724;">✓ Paso 2 completado: Modelo Whisper-small cargado<br></div>';
                     
                     modelBtn.textContent = '✓ Modelo cargado';
                     modelBtn.style.background = '#d4edda';
@@ -1689,7 +1689,7 @@
                 document.getElementById('model-btn').style.background = '#d4edda';
                 document.getElementById('model-btn').style.color = '#155724';
                 document.getElementById('model-btn').style.borderColor = '#c3e6cb';
-                document.getElementById('model-status').innerHTML = '<div class="status-message status-info" style="background: #d4edda; border-color: #c3e6cb; color: #155724;">✓ Modelo Whisper-tiny en caché<br><small>No es necesario descargar de nuevo</small></div>';
+                document.getElementById('model-status').innerHTML = '<div class="status-message status-info" style="background: #d4edda; border-color: #c3e6cb; color: #155724;">✓ Modelo en caché<br><small>No es necesario descargar de nuevo</small></div>';
                 
                 document.getElementById('start-btn').disabled = true;
                 document.getElementById('start-btn').textContent = '✓ Iniciar Prueba / Iniciar Prova';
@@ -1708,7 +1708,7 @@
                 document.getElementById('model-info').style.display = 'none';
                 document.getElementById('model-btn').style.display = 'none';
                 document.getElementById('model-btn').disabled = true;
-                document.getElementById('model-btn').textContent = '🤖 Cargar modelo Whisper-tiny';
+                document.getElementById('model-btn').textContent = '🤖 Cargar modelo';
                 document.getElementById('model-btn').style.background = '';
                 document.getElementById('model-btn').style.color = '';
                 document.getElementById('model-btn').style.borderColor = '';
